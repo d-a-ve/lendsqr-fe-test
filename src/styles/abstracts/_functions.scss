@@ -1,0 +1,100 @@
+// ==========================================================================
+// Functions
+// ==========================================================================
+
+@use 'sass:math';
+@use 'sass:map';
+@use 'variables' as *;
+
+// --------------------------------------------------------------------------
+// Unit Conversion
+// --------------------------------------------------------------------------
+
+/// Convert a pixel value to rem
+/// @param {Number} $px - Pixel value to convert
+/// @param {Number} $base [16] - Base font size in pixels
+/// @return {Number} - Rem value
+@function rem($px, $base: 16) {
+  @if math.is-unitless($px) {
+    @return math.div($px, $base) * 1rem;
+  } @else {
+    @return math.div(math.div($px, $px * 0 + 1), $base) * 1rem;
+  }
+}
+
+/// Convert a pixel value to em
+/// @param {Number} $px - Pixel value to convert
+/// @param {Number} $base [16] - Base font size in pixels
+/// @return {Number} - Em value
+@function em($px, $base: 16) {
+  @if math.is-unitless($px) {
+    @return math.div($px, $base) * 1em;
+  } @else {
+    @return math.div(math.div($px, $px * 0 + 1), $base) * 1em;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Spacing
+// --------------------------------------------------------------------------
+
+/// Get a spacing value from the spacing scale
+/// @param {Number} $step - Step in the spacing scale (0, 1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 20, 24, 32)
+/// @return {Number} - Spacing value
+@function spacing($step) {
+  @if map.has-key($spacing, $step) {
+    @return map.get($spacing, $step);
+  } @else {
+    @error "Unknown spacing step: #{$step}. Available steps: #{map.keys($spacing)}";
+  }
+}
+
+// --------------------------------------------------------------------------
+// Breakpoints
+// --------------------------------------------------------------------------
+
+/// Get a breakpoint value
+/// @param {String} $name - Breakpoint name (xs, sm, md, lg, xl, xxl)
+/// @return {Number} - Breakpoint value
+@function breakpoint($name) {
+  @if map.has-key($breakpoints, $name) {
+    @return map.get($breakpoints, $name);
+  } @else {
+    @error "Unknown breakpoint: #{$name}. Available breakpoints: #{map.keys($breakpoints)}";
+  }
+}
+
+// --------------------------------------------------------------------------
+// Typography
+// --------------------------------------------------------------------------
+
+/// Get a font size from the scale
+/// @param {String} $size - Size name (xs, sm, base, lg, xl, 2xl, 3xl, 4xl, 5xl)
+/// @return {Number} - Font size value
+@function font-size($size) {
+  @if map.has-key($font-sizes, $size) {
+    @return map.get($font-sizes, $size);
+  } @else {
+    @error "Unknown font size: #{$size}. Available sizes: #{map.keys($font-sizes)}";
+  }
+}
+
+// --------------------------------------------------------------------------
+// Color
+// --------------------------------------------------------------------------
+
+/// Slightly lighten a color
+/// @param {Color} $color - Color to lighten
+/// @param {Number} $percentage - Amount to lighten
+/// @return {Color} - Lightened color
+@function tint($color, $percentage) {
+  @return mix(white, $color, $percentage);
+}
+
+/// Slightly darken a color
+/// @param {Color} $color - Color to darken
+/// @param {Number} $percentage - Amount to darken
+/// @return {Color} - Darkened color
+@function shade($color, $percentage) {
+  @return mix(black, $color, $percentage);
+}

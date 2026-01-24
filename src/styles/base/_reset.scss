@@ -1,0 +1,310 @@
+// ==========================================================================
+// CSS Reset
+// Modern CSS reset for consistent cross-browser styling
+// ==========================================================================
+
+// --------------------------------------------------------------------------
+// Box Sizing
+// --------------------------------------------------------------------------
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+// --------------------------------------------------------------------------
+// Remove Default Margins & Paddings
+// --------------------------------------------------------------------------
+* {
+  margin: 0;
+  padding: 0;
+}
+
+// --------------------------------------------------------------------------
+// Root & Body
+// --------------------------------------------------------------------------
+html {
+  // Prevent font-size inflation on mobile
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+
+  // Smooth scrolling (respects user preferences)
+  @media (prefers-reduced-motion: no-preference) {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  // Minimum height to cover viewport
+  min-height: 100vh;
+  min-height: 100dvh;
+
+  // Better text rendering
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+// --------------------------------------------------------------------------
+// Typography
+// --------------------------------------------------------------------------
+
+// Remove default heading styles
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+// Balance text wrapping on headings (modern browsers)
+h1,
+h2,
+h3,
+h4 {
+  text-wrap: balance;
+}
+
+// Improve paragraph readability
+p,
+li,
+figcaption {
+  text-wrap: pretty;
+  max-width: 75ch;
+}
+
+// --------------------------------------------------------------------------
+// Lists
+// --------------------------------------------------------------------------
+ul,
+ol {
+  list-style: none;
+}
+
+// Restore list styles for content lists
+ul[role='list'],
+ol[role='list'] {
+  list-style: revert;
+  padding-left: 1.5em;
+}
+
+// --------------------------------------------------------------------------
+// Links
+// --------------------------------------------------------------------------
+a {
+  color: inherit;
+  text-decoration-skip-ink: auto;
+}
+
+// --------------------------------------------------------------------------
+// Media
+// --------------------------------------------------------------------------
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+img,
+picture {
+  height: auto;
+}
+
+// --------------------------------------------------------------------------
+// Forms
+// --------------------------------------------------------------------------
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+// Remove native appearance
+input,
+textarea,
+select {
+  appearance: none;
+  background-color: transparent;
+  border: none;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+textarea {
+  resize: vertical;
+}
+
+::placeholder {
+  opacity: 1;
+}
+
+// Remove inner border and padding in Firefox
+::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+// Remove additional `:invalid` styles in Firefox
+:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+// Correct outline style in Safari
+[type='search'] {
+  outline-offset: -2px;
+}
+
+// --------------------------------------------------------------------------
+// Focus Styles
+// --------------------------------------------------------------------------
+
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+// --------------------------------------------------------------------------
+// Tables
+// --------------------------------------------------------------------------
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+// --------------------------------------------------------------------------
+// Interactive Elements
+// --------------------------------------------------------------------------
+
+// Avoid text overflows
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+// Inherit fonts for all elements
+input,
+button,
+textarea,
+select,
+optgroup {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+// --------------------------------------------------------------------------
+// Reduced Motion
+// --------------------------------------------------------------------------
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Selection
+// --------------------------------------------------------------------------
+::selection {
+  background-color: Highlight;
+  color: HighlightText;
+}
+
+// --------------------------------------------------------------------------
+// Hidden Attribute
+// --------------------------------------------------------------------------
+[hidden] {
+  display: none !important;
+}
+
+// --------------------------------------------------------------------------
+// Summary / Details
+// --------------------------------------------------------------------------
+summary {
+  cursor: pointer;
+}
+
+// Remove marker in webkit
+summary::-webkit-details-marker {
+  display: none;
+}
+
+// --------------------------------------------------------------------------
+// Misc
+// --------------------------------------------------------------------------
+
+// Prevent `sub` and `sup` from affecting line height
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+// Remove gap between elements and bottom of container
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+  vertical-align: middle;
+}
+
+// Correct display type for progress in Chrome
+progress {
+  vertical-align: baseline;
+}
+
+// Add correct display in all browsers
+dialog {
+  background-color: inherit;
+  border: none;
+  color: inherit;
+  height: auto;
+  margin: auto;
+  max-height: none;
+  max-width: none;
+  overflow: visible;
+  padding: 0;
+  position: static;
+  width: auto;
+}
+
+dialog::backdrop {
+  background: none;
+}

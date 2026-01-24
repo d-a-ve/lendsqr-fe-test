@@ -1,0 +1,10 @@
+// ==========================================================================
+// Main Stylesheet
+// ==========================================================================
+
+// Abstracts (no CSS output, just tools: variables, functions, mixins)
+// Use @use for importing in other SCSS files:
+// @use 'path/to/abstracts' as *;
+
+// Base styles (reset, typography)
+@use 'base';

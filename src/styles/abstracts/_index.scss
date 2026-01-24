@@ -1,0 +1,13 @@
+// ==========================================================================
+// Abstracts Index
+// Forward all abstract partials for easy importing
+// ==========================================================================
+
+// Variables (design tokens)
+@forward 'variables';
+
+// Functions (helper utilities)
+@forward 'functions';
+
+// Mixins (reusable style patterns)
+@forward 'mixins';
