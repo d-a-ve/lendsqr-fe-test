@@ -1,0 +1,51 @@
+.inputWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.input {
+  @include transition(border-color, box-shadow);
+  width: 100%;
+  padding: spacing(4) spacing(4);
+  @include text-size(base);
+  color: $foreground;
+  background-color: $white;
+  border: 2px solid rgba($foreground, 0.15);
+  border-radius: $radius-lg;
+  outline: none;
+
+  &::placeholder {
+    color: rgba($foreground, 0.6);
+  }
+
+  &:focus {
+    border-color: $primary;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: rgba($foreground, 0.05);
+  }
+
+  &--withToggle {
+    padding-right: spacing(16);
+  }
+}
+
+.toggle {
+  @include reset-button;
+  position: absolute;
+  right: spacing(4);
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: $font-weight-semibold;
+  @include text-size(xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $primary;
+
+  &:hover {
+    color: shade($primary, 15%);
+  }
+}

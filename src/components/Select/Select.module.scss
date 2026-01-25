@@ -1,0 +1,285 @@
+
+
+.group {
+  scroll-margin: spacing(1);
+  padding: spacing(1);
+}
+
+.value {
+  display: flex;
+  flex: 1;
+  text-align: left;
+}
+
+.trigger {
+  @include transition(border-color, box-shadow);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: spacing(1);
+  width: 100%;
+  padding: spacing(2) spacing(2) spacing(2) spacing(2);
+  @include text-size(sm);
+  color: $foreground;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 1px solid rgba($foreground, 0.15);
+  border-radius: $radius-lg;
+  outline: none;
+  cursor: pointer;
+  user-select: none;
+
+  &:focus-visible {
+    border-color: $primary;
+    box-shadow: 0 0 0 3px rgba($primary, 0.15);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &[aria-invalid='true'] {
+    border-color: $error;
+    box-shadow: 0 0 0 3px rgba($error, 0.2);
+  }
+
+  &[data-size='default'] {
+    height: 32px;
+  }
+
+  &[data-size='sm'] {
+    height: 28px;
+    border-radius: $radius-md;
+  }
+
+  [data-slot='select-value'] {
+    display: flex;
+    align-items: center;
+    gap: spacing(1);
+    @include line-clamp(1);
+  }
+
+  svg {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    pointer-events: none;
+  }
+}
+
+.triggerIcon {
+  width: 16px;
+  height: 16px;
+  color: rgba($foreground, 0.6);
+  pointer-events: none;
+}
+
+.positioner {
+  isolation: isolate;
+  z-index: 50;
+}
+
+.content {
+  position: relative;
+  isolation: isolate;
+  z-index: 50;
+  min-width: 144px;
+  max-height: var(--available-height);
+  width: var(--anchor-width);
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: $white;
+  color: $secondary;
+  border-radius: $radius-lg;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transform-origin: var(--transform-origin);
+
+  &[data-open] {
+    animation: fadeIn 100ms ease-out, zoomIn 100ms ease-out;
+  }
+
+  &[data-closed] {
+    animation: fadeOut 100ms ease-in, zoomOut 100ms ease-in;
+  }
+
+  &[data-side='bottom'] {
+    animation: fadeIn 100ms ease-out, slideInFromTop 100ms ease-out;
+  }
+
+  &[data-side='top'] {
+    animation: fadeIn 100ms ease-out, slideInFromBottom 100ms ease-out;
+  }
+
+  &[data-side='left'],
+  &[data-side='inline-start'] {
+    animation: fadeIn 100ms ease-out, slideInFromRight 100ms ease-out;
+  }
+
+  &[data-side='right'],
+  &[data-side='inline-end'] {
+    animation: fadeIn 100ms ease-out, slideInFromLeft 100ms ease-out;
+  }
+
+  &[data-align-trigger='true'] {
+    animation: none;
+  }
+}
+
+.label {
+  padding: spacing(1) spacing(1);
+  @include text-size(xs);
+  color: rgba($foreground, 0.6);
+}
+
+.item {
+  @include transition(background-color);
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: spacing(1);
+  width: 100%;
+  padding: spacing(2) spacing(4);
+  @include text-size(sm);
+  color: $secondary;
+  outline: none;
+  cursor: default;
+  user-select: none;
+
+  &:focus,
+  &[data-highlighted] {
+    background-color: rgba($primary, 0.1);
+    color: $secondary;
+
+    [data-slot='select-item-indicator'] {
+      color: $secondary;
+    }
+  }
+
+  &[data-disabled] {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  svg {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    pointer-events: none;
+  }
+}
+
+.itemText {
+  display: flex;
+  flex: 1;
+  flex-shrink: 0;
+  gap: spacing(2);
+  white-space: nowrap;
+}
+
+.itemIndicator {
+  position: absolute;
+  right: spacing(2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+}
+
+.separator {
+  height: 1px;
+  margin: spacing(1) calc(spacing(1) * -1);
+  background-color: rgba($foreground, 0.1);
+  pointer-events: none;
+}
+
+.scrollButton {
+  @include flex-center;
+  z-index: 10;
+  width: 100%;
+  padding: spacing(1) 0;
+  background-color: $white;
+  cursor: default;
+
+  svg {
+    width: 16px;
+    height: 16px;
+    color: $foreground;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.95);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes zoomOut {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0.95);
+  }
+}
+
+@keyframes slideInFromTop {
+  from {
+    transform: translateY(-8px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromBottom {
+  from {
+    transform: translateY(8px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-8px);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(8px);
+  }
+  to {
+    transform: translateX(0);
+  }
+}

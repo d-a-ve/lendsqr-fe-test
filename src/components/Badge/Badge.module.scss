@@ -1,0 +1,31 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: spacing(1) spacing(3);
+  @include text-size(xs);
+  font-weight: $font-weight-normal;
+  border-radius: $radius-full;
+  white-space: nowrap;
+
+  // Variants
+  &--default {
+    background-color: rgba($foreground, 0.1);
+    color: $foreground;
+  }
+
+  &--success {
+    background-color: rgba($success, 0.1);
+    color: $success;
+  }
+
+  &--warning {
+    background-color: rgba($warning, 0.1);
+    color: $warning;
+  }
+
+  &--error {
+    background-color: rgba($error, 0.1);
+    color: $error;
+  }
+}

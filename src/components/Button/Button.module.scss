@@ -1,0 +1,105 @@
+.button {
+  @include inline-flex-center;
+  @include transition(background-color, border-color, color);
+  gap: spacing(2);
+  font-weight: $font-weight-semibold;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: $radius-lg;
+  cursor: pointer;
+  border: 1px solid transparent;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  // Variants
+  &--primary {
+    background-color: $primary;
+    color: $white;
+    border-color: $primary;
+
+    &:hover:not(:disabled) {
+      background-color: shade($primary, 10%);
+      border-color: shade($primary, 10%);
+    }
+
+    &:active:not(:disabled) {
+      background-color: shade($primary, 20%);
+      border-color: shade($primary, 20%);
+    }
+  }
+
+  &--outline {
+    background-color: transparent;
+    color: $foreground;
+    border-color: $foreground;
+
+    &:hover:not(:disabled) {
+      background-color: rgba($foreground, 0.05);
+    }
+
+    &:active:not(:disabled) {
+      background-color: rgba($foreground, 0.1);
+    }
+  }
+
+  &--outline-primary {
+    background-color: transparent;
+    color: $primary;
+    border-color: $primary;
+
+    &:hover:not(:disabled) {
+      background-color: rgba($primary, 0.05);
+    }
+
+    &:active:not(:disabled) {
+      background-color: rgba($primary, 0.1);
+    }
+  }
+
+  &--outline-destructive {
+    background-color: transparent;
+    color: $error;
+    border-color: $error;
+
+    &:hover:not(:disabled) {
+      background-color: rgba($error, 0.05);
+    }
+
+    &:active:not(:disabled) {
+      background-color: rgba($error, 0.1);
+    }
+  }
+
+  &--ghost {
+    background-color: transparent;
+    color: $foreground;
+    border-color: transparent;
+
+    &:hover:not(:disabled) {
+      background-color: rgba($foreground, 0.05);
+    }
+
+    &:active:not(:disabled) {
+      background-color: rgba($foreground, 0.1);
+    }
+  }
+
+  // Sizes
+  &--sm {
+    @include text-size(xs);
+    padding: spacing(2) spacing(4);
+  }
+
+  &--md {
+    @include text-size(sm);
+    padding: spacing(3) spacing(6);
+  }
+
+  &--lg {
+    @include text-size(base);
+    padding: spacing(4) spacing(8);
+  }
+}

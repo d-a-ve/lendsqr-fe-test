@@ -1,0 +1,56 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: spacing(4);
+}
+
+.pages {
+  display: flex;
+  align-items: center;
+  gap: spacing(4);
+}
+
+.arrow {
+  @include reset-button;
+  @include flex-center;
+  @include transition(background-color, opacity);
+  width: 24px;
+  height: 24px;
+  background-color: rgba($secondary, 0.1);
+  border-radius: $radius-base;
+  color: $secondary;
+
+  &:hover:not(:disabled) {
+    background-color: rgba($secondary, 0.2);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.page {
+  @include reset-button;
+  @include transition(color, font-weight);
+  @include text-size(base);
+  color: rgba($secondary, 0.6);
+  min-width: 24px;
+  text-align: center;
+
+  &:hover:not(:disabled) {
+    color: $secondary;
+  }
+
+  &--active {
+    color: $secondary;
+    font-weight: $font-weight-semibold;
+  }
+}
+
+.ellipsis {
+  @include text-size(base);
+  color: rgba($secondary, 0.6);
+  min-width: 24px;
+  text-align: center;
+}
