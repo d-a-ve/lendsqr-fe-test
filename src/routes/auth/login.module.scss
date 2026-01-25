@@ -1,0 +1,146 @@
+.page {
+  min-height: 100dvh;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  font-family: $font-family-avenir;
+}
+
+.card {
+  flex: 1;
+  min-height: 100dvh;
+  background: $white-200;
+  border-radius: $radius-xl;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.left {
+  padding: spacing(12) spacing(16);
+  display: flex;
+  flex-direction: column;
+  gap: spacing(12);
+}
+
+.brand {
+  display: flex;
+  align-items: flex-start;
+}
+
+.graphic {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  mix-blend-mode: multiply;
+}
+
+.right {
+  padding: spacing(12) spacing(16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $white;
+}
+
+.rightBrand {
+  display: none;
+}
+
+.formWrap {
+  width: min(447px, 100%);
+}
+
+.form {
+  @include flex-column;
+}
+
+.heading {
+  margin-bottom: spacing(2);
+  color: $secondary;
+}
+
+.subheading {
+  margin: 0 0 spacing(16) 0;
+  color: rgba($foreground, 0.8);
+}
+
+.formError {
+  margin-bottom: spacing(6);
+  padding: spacing(3) spacing(4);
+  border-radius: $radius-lg;
+  border: 1px solid rgba($error, 0.25);
+  background: rgba($error, 0.06);
+  color: $error;
+  @include text-size(sm);
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: spacing(6);
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: spacing(2);
+}
+
+.label {
+  @include visually-hidden;
+}
+
+.fieldError {
+  margin: 0;
+  color: $error;
+  @include text-size(sm);
+}
+
+.invalidInput {
+  border-color: $error;
+}
+
+.forgot {
+  align-self: flex-start;
+  font-weight: $font-weight-semibold;
+  @include text-size(xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: spacing(6) 0 spacing(8) 0;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: spacing(4);
+}
+
+.submit,
+.demoButton {
+  width: 100%;
+}
+
+@include respond-below('md') {
+  .card {
+    grid-template-columns: 1fr;
+  }
+
+  .left {
+    padding: spacing(10) spacing(8);
+    display: none;
+  }
+
+  .right {
+    padding: spacing(10) spacing(8);
+    border-left: none;
+    border-top: 1px solid rgba($foreground, 0.08);
+  }
+
+  .rightBrand {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: spacing(3);
+  }
+}
