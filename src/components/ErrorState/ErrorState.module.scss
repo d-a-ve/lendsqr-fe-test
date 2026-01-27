@@ -1,0 +1,313 @@
+.errorState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 420px;
+  padding: spacing(10);
+  text-align: center;
+}
+
+.visual {
+  position: relative;
+  width: 200px;
+  height: 180px;
+  margin-bottom: spacing(8);
+}
+
+.orbit {
+  position: absolute;
+  inset: 0;
+  border: 2px dashed rgba($coral, 0.25);
+  border-radius: $radius-full;
+  animation: spin 30s linear infinite;
+}
+
+.orbitInner {
+  position: absolute;
+  inset: 30px;
+  border: 1px dashed rgba($secondary, 0.15);
+  border-radius: $radius-full;
+  animation: spin 20s linear infinite reverse;
+}
+
+.shapeGroup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+}
+
+.hexagon {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba($coral, 0.12) 0%, rgba($cherry-red, 0.08) 100%);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  animation: float 4s ease-in-out infinite;
+}
+
+.triangle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50px;
+  height: 50px;
+  transform: translate(-50%, -50%) rotate(15deg);
+  background: linear-gradient(180deg, rgba($secondary, 0.9) 0%, rgba($secondary, 0.7) 100%);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.exclamation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  font-family: $font-family-work-sans;
+  font-size: 1.75rem;
+  font-weight: $font-weight-bold;
+  color: $white;
+  line-height: 1;
+  text-shadow: 0 2px 8px rgba($secondary, 0.3);
+}
+
+.dot1,
+.dot2,
+.dot3 {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: $radius-full;
+  animation: blink 2s ease-in-out infinite;
+}
+
+.dot1 {
+  top: 10%;
+  right: 15%;
+  background-color: $coral;
+  animation-delay: 0s;
+}
+
+.dot2 {
+  bottom: 20%;
+  left: 10%;
+  background-color: $primary;
+  animation-delay: 0.4s;
+}
+
+.dot3 {
+  top: 35%;
+  left: 5%;
+  background-color: rgba($secondary, 0.4);
+  width: 6px;
+  height: 6px;
+  animation-delay: 0.8s;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: spacing(3);
+  max-width: 400px;
+  animation: fadeUp 0.5s ease-out 0.2s backwards;
+}
+
+.title {
+  margin: 0;
+  @include text-size(xl);
+  font-weight: $font-weight-semibold;
+  color: $secondary;
+}
+
+.description {
+  margin: 0;
+  @include text-size(sm);
+  color: rgba($secondary, 0.7);
+  line-height: 1.6;
+}
+
+.code {
+  display: inline-block;
+  padding: spacing(1) spacing(2);
+  background-color: rgba($coral, 0.08);
+  border-radius: $radius-base;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  @include text-size(xs);
+  color: $coral;
+  margin-top: spacing(1);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: spacing(4);
+  margin-top: spacing(6);
+  animation: fadeUp 0.5s ease-out 0.4s backwards;
+}
+
+.backLink {
+  @include inline-flex-center;
+  @include transition(background-color, border-color, color);
+  gap: spacing(2);
+  font-weight: $font-weight-semibold;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: $radius-lg;
+  cursor: pointer;
+  border: 1px solid $foreground;
+  background-color: transparent;
+  color: $foreground;
+  @include text-size(xs);
+  padding: spacing(2) spacing(4);
+  text-decoration: none;
+
+  &:hover {
+    background-color: rgba($foreground, 0.05);
+    text-decoration: none;
+  }
+
+  &:active {
+    background-color: rgba($foreground, 0.1);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $primary;
+    outline-offset: 2px;
+  }
+}
+
+// Variant: User Not Found
+.errorState--notFound {
+  .hexagon {
+    background: linear-gradient(
+      135deg,
+      rgba($secondary, 0.12) 0%,
+      rgba($blue, 0.08) 100%
+    );
+  }
+
+  .triangle {
+    background: linear-gradient(
+      180deg,
+      rgba($foreground, 0.85) 0%,
+      rgba($foreground, 0.6) 100%
+    );
+    clip-path: none;
+    border-radius: $radius-full;
+    width: 56px;
+    height: 56px;
+  }
+
+  .exclamation {
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+  }
+
+  .orbit {
+    border-color: rgba($secondary, 0.15);
+  }
+
+  .dot1 {
+    background-color: $blue;
+  }
+}
+
+// Animations
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-8px) scale(1.02);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.8);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@include respond-below(sm) {
+  .errorState {
+    padding: spacing(8) spacing(4);
+    min-height: 360px;
+  }
+
+  .visual {
+    width: 160px;
+    height: 140px;
+  }
+
+  .shapeGroup {
+    width: 80px;
+    height: 80px;
+  }
+
+  .triangle {
+    width: 40px;
+    height: 40px;
+  }
+
+  .errorState--notFound .triangle {
+    width: 48px;
+    height: 48px;
+  }
+
+  .exclamation {
+    font-size: 1.5rem;
+  }
+
+  .errorState--notFound .exclamation {
+    font-size: 1.25rem;
+  }
+
+  .actions {
+    flex-direction: column;
+    width: 100%;
+
+    & > * {
+      width: 100%;
+    }
+  }
+}

@@ -1,5 +1,3 @@
-
-
 .group {
   scroll-margin: spacing(1);
   padding: spacing(1);
@@ -18,12 +16,12 @@
   justify-content: space-between;
   gap: spacing(1);
   width: 100%;
-  padding: spacing(2) spacing(2) spacing(2) spacing(2);
+  padding: spacing(2);
   @include text-size(sm);
   color: $foreground;
   white-space: nowrap;
   background-color: transparent;
-  border: 1px solid rgba($foreground, 0.15);
+  border: 2px solid rgba($foreground, 0.15);
   border-radius: $radius-lg;
   outline: none;
   cursor: pointer;
@@ -45,11 +43,11 @@
   }
 
   &[data-size='default'] {
-    height: 32px;
+    padding: spacing(4);
   }
 
   &[data-size='sm'] {
-    height: 28px;
+    padding: spacing(3);
     border-radius: $radius-md;
   }
 
@@ -98,29 +96,41 @@
   transform-origin: var(--transform-origin);
 
   &[data-open] {
-    animation: fadeIn 100ms ease-out, zoomIn 100ms ease-out;
+    animation:
+      fadeIn 100ms ease-out,
+      zoomIn 100ms ease-out;
   }
 
   &[data-closed] {
-    animation: fadeOut 100ms ease-in, zoomOut 100ms ease-in;
+    animation:
+      fadeOut 100ms ease-in,
+      zoomOut 100ms ease-in;
   }
 
   &[data-side='bottom'] {
-    animation: fadeIn 100ms ease-out, slideInFromTop 100ms ease-out;
+    animation:
+      fadeIn 100ms ease-out,
+      slideInFromTop 100ms ease-out;
   }
 
   &[data-side='top'] {
-    animation: fadeIn 100ms ease-out, slideInFromBottom 100ms ease-out;
+    animation:
+      fadeIn 100ms ease-out,
+      slideInFromBottom 100ms ease-out;
   }
 
   &[data-side='left'],
   &[data-side='inline-start'] {
-    animation: fadeIn 100ms ease-out, slideInFromRight 100ms ease-out;
+    animation:
+      fadeIn 100ms ease-out,
+      slideInFromRight 100ms ease-out;
   }
 
   &[data-side='right'],
   &[data-side='inline-end'] {
-    animation: fadeIn 100ms ease-out, slideInFromLeft 100ms ease-out;
+    animation:
+      fadeIn 100ms ease-out,
+      slideInFromLeft 100ms ease-out;
   }
 
   &[data-align-trigger='true'] {

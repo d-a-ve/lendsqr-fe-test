@@ -1,0 +1,24 @@
+.layout {
+  min-height: 100vh;
+}
+
+.body {
+  display: grid;
+  grid-template-columns: 283px 1fr;
+  align-items: start;
+}
+
+.main {
+  padding: spacing(16);
+  min-width: 0;
+}
+
+@include respond-below(tablet) {
+  .body {
+    grid-template-columns: 1fr;
+  }
+
+  .main {
+    padding: spacing(6);
+  }
+}

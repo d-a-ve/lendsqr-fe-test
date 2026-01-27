@@ -205,6 +205,42 @@
   }
 }
 
+/// Custom scrollbar styling (keeps scrolling accessible)
+/// @param {Number} $size [8px] - Scrollbar thickness
+/// @param {Color} $thumb [rgba($foreground, 0.25)] - Thumb color
+/// @param {Color} $thumb-hover [rgba($foreground, 0.4)] - Thumb hover color
+/// @param {Color} $track [transparent] - Track color
+/// @param {Number} $radius [$radius-full] - Thumb radius
+@mixin custom-scrollbar(
+  $size: 8px,
+  $thumb: rgba($foreground, 0.25),
+  $thumb-hover: rgba($foreground, 0.4),
+  $track: transparent,
+  $radius: $radius-full
+) {
+  scrollbar-width: thin;
+  scrollbar-color: $thumb $track;
+
+  &::-webkit-scrollbar {
+    width: $size;
+    height: $size;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $track;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $thumb;
+    border-radius: $radius;
+    border: 2px solid $track;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: $thumb-hover;
+  }
+}
+
 // --------------------------------------------------------------------------
 // Transitions
 // --------------------------------------------------------------------------

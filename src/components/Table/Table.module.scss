@@ -2,6 +2,7 @@
   position: relative;
   width: 100%;
   overflow-x: auto;
+  @include custom-scrollbar;
 }
 
 .table {
@@ -67,6 +68,7 @@
   text-transform: uppercase;
   vertical-align: middle;
   white-space: nowrap;
+  align-items: center;
 
   &:has([role='checkbox']) {
     padding-right: 0;

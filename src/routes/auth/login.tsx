@@ -1,6 +1,7 @@
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
 import { Logo } from '@/components/Logo'
+import { sleep } from '@/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { useEffect, useId, useRef } from 'react'
@@ -18,8 +19,6 @@ const DEMO_PASSWORD = 'Test1234!'
 const LOGIN_DELAY_MS = 2000
 const ROOT_ERROR_CLEAR_MS = 3000
 
-const sleep = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms))
-
 const loginSchema = z.object({
   email: z
     .email('Please enter a valid email address')
@@ -36,7 +35,7 @@ function RouteComponent() {
   const emailErrorId = useId()
   const passwordErrorId = useId()
   const formErrorId = useId()
-  
+
   const router = useRouter()
 
   const rootErrorTimeoutRef = useRef<number | null>(null)

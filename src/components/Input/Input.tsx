@@ -3,7 +3,15 @@ import styles from './Input.module.scss'
 
 export interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
-  type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'search'
+  type?:
+    | 'text'
+    | 'email'
+    | 'password'
+    | 'number'
+    | 'tel'
+    | 'url'
+    | 'search'
+    | 'date'
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(

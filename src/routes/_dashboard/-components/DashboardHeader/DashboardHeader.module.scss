@@ -1,0 +1,320 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background-color: $white;
+  box-shadow: 3px 0 20px rgba($black, 0.04);
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: 283px 1fr;
+  align-items: center;
+  column-gap: spacing(16);
+  padding: spacing(4) spacing(16) spacing(4) 0;
+}
+
+.logoArea {
+  display: flex;
+  align-items: center;
+  gap: spacing(4);
+  padding-left: spacing(8);
+}
+
+.menuToggle {
+  @include reset-button;
+  @include inline-flex-center;
+  width: 40px;
+  height: 40px;
+  border-radius: $radius-lg;
+  color: $secondary;
+  display: none;
+
+  &:hover {
+    background-color: rgba($foreground, 0.06);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $primary;
+    outline-offset: 2px;
+  }
+}
+
+.menuIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.right {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: spacing(10);
+}
+
+.searchForm {
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  align-items: stretch;
+}
+
+.searchInput {
+  padding: spacing(3) spacing(5);
+  border-width: 1px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: 0;
+}
+
+.searchButton {
+  min-width: 56px;
+  padding: 0 spacing(5);
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.searchIcon {
+  width: 18px;
+  height: 18px;
+}
+
+.searchTrigger {
+  @include reset-button;
+  @include inline-flex-center;
+  width: 40px;
+  height: 40px;
+  border-radius: $radius-full;
+  color: $secondary;
+  display: none;
+
+  &:hover {
+    background-color: rgba($foreground, 0.06);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $primary;
+    outline-offset: 2px;
+  }
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: spacing(6);
+  margin-left: auto;
+  & p {
+    margin-bottom: 0;
+  }
+}
+
+.docsLink {
+  @include text-size(sm);
+  font-weight: $font-weight-medium;
+  color: $secondary;
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.iconButton {
+  @include reset-button;
+  @include inline-flex-center;
+  width: 40px;
+  height: 40px;
+  border-radius: $radius-full;
+  color: $secondary;
+
+  &:hover {
+    background-color: rgba($foreground, 0.06);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $primary;
+    outline-offset: 2px;
+  }
+}
+
+.actionIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.userTrigger {
+  @include reset-button;
+  display: inline-flex;
+  align-items: center;
+  gap: spacing(2);
+  padding: spacing(2);
+  border-radius: $radius-lg;
+  color: $secondary;
+
+  &:hover {
+    background-color: rgba($foreground, 0.06);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $primary;
+    outline-offset: 2px;
+  }
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: $radius-full;
+  background-color: $foreground;
+  color: $white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: $font-weight-semibold;
+  flex-shrink: 0;
+  @include text-size(sm);
+}
+
+.userName {
+  @include text-size(sm);
+  font-weight: $font-weight-medium;
+  color: $secondary;
+}
+
+.caret {
+  width: 16px;
+  height: 16px;
+  color: rgba($secondary, 0.7);
+  flex-shrink: 0;
+}
+
+.searchModal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background-color: $white;
+  animation: fadeIn 150ms ease-out;
+  overflow-y: auto;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.searchModalHeader {
+  display: flex;
+  align-items: center;
+  gap: spacing(3);
+  padding: spacing(4);
+  border-bottom: 1px solid rgba($foreground, 0.1);
+}
+
+.searchModalForm {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: spacing(3);
+}
+
+.searchModalIcon {
+  width: 20px;
+  height: 20px;
+  color: rgba($secondary, 0.5);
+  flex-shrink: 0;
+}
+
+.searchModalInput {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  @include text-size(base);
+  color: $secondary;
+
+  &::placeholder {
+    color: rgba($secondary, 0.5);
+  }
+}
+
+.searchModalClose {
+  @include reset-button;
+  @include inline-flex-center;
+  width: 40px;
+  height: 40px;
+  border-radius: $radius-full;
+  color: $secondary;
+  flex-shrink: 0;
+
+  &:hover {
+    background-color: rgba($foreground, 0.06);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $primary;
+    outline-offset: 2px;
+  }
+}
+
+.closeIcon {
+  width: 20px;
+  height: 20px;
+}
+
+@include respond-below(tablet) {
+  .inner {
+    grid-template-columns: auto 1fr;
+    padding: spacing(3) spacing(4);
+    column-gap: spacing(4);
+  }
+
+  .logoArea {
+    padding-left: 0;
+  }
+
+  .menuToggle {
+    display: inline-flex;
+  }
+
+  .searchForm {
+    display: none;
+  }
+
+  .searchTrigger {
+    display: inline-flex;
+  }
+
+  .right {
+    justify-content: flex-end;
+    gap: spacing(2);
+  }
+}
+
+.mobileOnly {
+  display: none;
+}
+
+@include respond-below(sm) {
+  .userName {
+    display: none;
+  }
+
+  .actions {
+    gap: spacing(2);
+  }
+
+  .docsLink,
+  .iconButton {
+    display: none;
+  }
+
+  .mobileOnly {
+    display: flex;
+  }
+}

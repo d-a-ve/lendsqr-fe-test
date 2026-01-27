@@ -1,0 +1,77 @@
+.headerIconButton {
+  @include reset-button;
+  @include flex-center;
+  width: 24px;
+  height: 24px;
+  border-radius: $radius-base;
+  color: rgba($secondary, 0.6);
+
+  &:hover {
+    background-color: rgba($foreground, 0.06);
+    color: rgba($secondary, 0.9);
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgba($primary, 0.6);
+    outline-offset: 2px;
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.filterPopover {
+  width: min(360px, calc(100vw - 24px));
+  padding: spacing(6);
+}
+
+.filterHeader {
+  margin-bottom: spacing(2);
+}
+
+.filterForm {
+  display: flex;
+  flex-direction: column;
+  gap: spacing(4);
+}
+
+.filterField {
+  display: flex;
+  flex-direction: column;
+  gap: spacing(2);
+}
+
+.filterInput {
+  padding: spacing(3) spacing(4);
+  @include text-size(sm);
+}
+
+.filterLabel {
+  @include text-size(sm);
+  font-weight: $font-weight-medium;
+  color: rgba($secondary, 0.9);
+}
+
+.dateField {
+  position: relative;
+}
+
+.dateIcon {
+  position: absolute;
+  right: spacing(4);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  color: rgba($foreground, 0.6);
+  pointer-events: none;
+}
+
+.filterActions {
+  margin-top: spacing(2);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: spacing(4);
+}

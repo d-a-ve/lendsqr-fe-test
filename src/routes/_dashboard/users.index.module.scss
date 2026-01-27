@@ -1,0 +1,212 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: spacing(8);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  margin: 0;
+  color: $secondary;
+  font-size: font-size('2xl');
+  font-weight: $font-weight-medium;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: spacing(6);
+}
+
+.statCard {
+  background-color: $white;
+  border-radius: $radius-sm;
+  padding: spacing(5) spacing(6);
+  box-shadow: 3px 5px 20px rgba($black, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: spacing(3);
+  min-width: 0;
+  border: 1px solid rgba($foreground, 0.04);
+}
+
+.statIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: $radius-full;
+  background-color: rgba($primary, 0.08);
+  color: $primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &[data-tone='purple'] {
+    background-color: rgba($purple, 0.1);
+    color: $purple;
+  }
+
+  &[data-tone='blue'] {
+    background-color: rgba($blue, 0.1);
+    color: $blue;
+  }
+
+  &[data-tone='orange'] {
+    background-color: rgba($coral, 0.1);
+    color: $coral;
+  }
+
+  &[data-tone='pink'] {
+    background-color: rgba($cherry-red, 0.1);
+    color: $cherry-red;
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.statLabel {
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  @include text-size(xs);
+  font-weight: $font-weight-medium;
+  color: rgba($foreground, 0.8);
+}
+
+.statValue {
+  @include text-size(xl);
+  font-weight: $font-weight-semibold;
+  color: $secondary;
+  line-height: 1;
+}
+
+.tableCard {
+  background-color: $white;
+  border-radius: $radius-lg;
+  padding: spacing(6);
+  box-shadow: 3px 5px 20px rgba($black, 0.04);
+  position: relative;
+  transition: opacity 0.2s ease-out;
+
+  &[data-loading='true'] {
+    opacity: 0.6;
+    pointer-events: none;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba($white, 0.4) 50%,
+        transparent 100%
+      );
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+    }
+  }
+
+  &[data-empty='true'] {
+    height: 450px;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.actionsCell {
+  width: 1%;
+  text-align: right;
+}
+
+.kebabButton {
+  @include reset-button;
+  @include flex-center;
+  width: 32px;
+  height: 32px;
+  border-radius: $radius-base;
+  color: rgba($secondary, 0.7);
+
+  &:hover {
+    background-color: rgba($foreground, 0.06);
+    color: rgba($secondary, 0.95);
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgba($primary, 0.6);
+    outline-offset: 2px;
+  }
+}
+
+.emptyTableContent {
+  position: absolute;
+  padding-block: 150px;
+  top: 50%;
+  translate: -50% -50%;
+  left: 50%;
+  text-align: center;
+}
+
+.row {
+  cursor: pointer;
+}
+
+.rowMenu {
+  width: 180px;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: spacing(6);
+  margin-top: calc(spacing(5) * -1);
+  flex-wrap: wrap;
+}
+
+.footerLeft {
+  display: flex;
+  align-items: center;
+  gap: spacing(3);
+  min-width: 0;
+}
+
+.footerText {
+  @include text-size(sm);
+  color: rgba($secondary, 0.7);
+}
+
+.selectTrigger.selectTrigger {
+  width: 80px;
+  background: rgba($secondary, 0.1);
+  padding: spacing(1) spacing(2);
+}
+
+.srOnly {
+  @include visually-hidden;
+}
+
+@include respond-below(lg) {
+  .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@include respond-below(sm) {
+  .footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

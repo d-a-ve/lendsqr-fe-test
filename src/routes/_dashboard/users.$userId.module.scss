@@ -1,0 +1,337 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: spacing(10);
+}
+
+.backButton {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  gap: spacing(2);
+  padding: spacing(2);
+  border-radius: $radius-lg;
+  color: $secondary;
+
+  &:hover {
+    background-color: rgba($foreground, 0.06);
+    text-decoration: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $primary;
+    outline-offset: 2px;
+  }
+}
+
+.pageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: spacing(8);
+  margin-top: calc(spacing(4) * -1);
+}
+
+.pageTitle {
+  margin: 0;
+  color: $secondary;
+  font-size: font-size('2xl');
+  font-weight: $font-weight-medium;
+}
+
+.pageActions {
+  display: flex;
+  align-items: center;
+  gap: spacing(6);
+
+  & button {
+    text-transform: uppercase;
+  }
+}
+
+.profileCard {
+  background-color: $white;
+  border-radius: $radius-lg;
+  box-shadow: 3px 5px 20px rgba($black, 0.04);
+  overflow: hidden;
+}
+
+.profileTop {
+  display: flex;
+  align-items: center;
+  gap: spacing(8);
+  padding: spacing(8);
+}
+
+.profileIdentity {
+  display: flex;
+  align-items: center;
+  gap: spacing(4);
+  min-width: 0;
+}
+
+.avatar {
+  width: 88px;
+  height: 88px;
+  border-radius: $radius-full;
+  background-color: rgba($secondary, 0.12);
+  color: rgba($secondary, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  svg {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+.identityText {
+  min-width: 0;
+}
+
+.fullName {
+  @include text-size(xl);
+  font-weight: $font-weight-medium;
+  color: $secondary;
+}
+
+.userRef {
+  margin-top: spacing(1);
+  @include text-size(sm);
+}
+
+.profileDivider {
+  width: 1px;
+  align-self: stretch;
+  background-color: rgba($foreground, 0.1);
+}
+
+.tier {
+  display: flex;
+  flex-direction: column;
+  gap: spacing(2);
+  min-width: 140px;
+}
+
+.tierLabel {
+  @include text-size(sm);
+}
+
+.stars {
+  display: flex;
+  align-items: center;
+  gap: spacing(1);
+}
+
+.star,
+.starActive {
+  width: 16px;
+  height: 16px;
+}
+
+.star {
+  color: rgba($warning, 0.35);
+}
+
+.starActive {
+  color: $warning;
+  fill: $warning;
+}
+
+.account {
+  min-width: 0;
+}
+
+.balance {
+  @include text-size(xl);
+  font-weight: $font-weight-medium;
+  color: $secondary;
+}
+
+.accountMeta {
+  margin-top: spacing(1);
+  @include text-size(xs);
+  color: $secondary;
+}
+
+.tabs {
+  display: flex;
+  gap: spacing(8);
+  justify-content: space-between;
+  padding: 0 spacing(10);
+  overflow-x: auto;
+  @include hide-scrollbar;
+}
+
+.tab {
+  @include reset-button;
+  padding: spacing(3) spacing(6);
+  @include text-size(sm);
+  border-bottom: 2px solid transparent;
+  @include transition(color, border-color);
+  white-space: nowrap;
+
+  &:not(.tabActive):hover {
+    color: $primary;
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgba($primary, 0.6);
+    outline-offset: -2px;
+  }
+}
+
+.tabActive {
+  color: $primary;
+  border-bottom-color: $primary;
+}
+
+.detailsCard {
+  background-color: $white;
+  border-radius: $radius-lg;
+  box-shadow: 3px 5px 20px rgba($black, 0.04);
+  padding: spacing(8);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: spacing(8);
+}
+
+.sectionTitle {
+  margin: 0;
+  @include text-size(base);
+  font-weight: $font-weight-medium;
+  color: $secondary;
+}
+
+.divider {
+  height: 1px;
+  background-color: rgba($foreground, 0.08);
+  margin: spacing(8) 0;
+}
+
+.kv {
+  display: flex;
+  flex-direction: column;
+  gap: spacing(2);
+  min-width: 0;
+}
+
+.kLabel {
+  text-transform: uppercase;
+  @include text-size('xs');
+}
+
+.kValue {
+  @include text-size('sm');
+  font-weight: $font-weight-medium;
+  word-break: break-all;
+}
+
+.grid5 {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: spacing(8);
+}
+
+.grid4 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: spacing(8);
+}
+
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: spacing(8);
+}
+
+.guarantors {
+  display: flex;
+  flex-direction: column;
+  gap: spacing(8);
+}
+
+.guarantorRow {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: spacing(8);
+  padding-bottom: spacing(8);
+  border-bottom: 1px solid rgba($foreground, 0.08);
+
+  &:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+}
+
+.mutedText {
+  margin: 0;
+  @include text-size(sm);
+  color: rgba($secondary, 0.7);
+}
+
+.notFoundTitle {
+  margin: 0;
+  color: $secondary;
+}
+
+.notFoundText {
+  margin: spacing(2) 0 0;
+  @include text-size(sm);
+  color: rgba($secondary, 0.7);
+}
+
+@include respond-below(lg) {
+  .tabs {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .grid5 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grid4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grid3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .guarantorRow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@include respond-below(sm) {
+  .profileTop {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .profileDivider {
+    display: none;
+  }
+}
+
+@include respond-below(sm) {
+  .pageHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: spacing(4);
+  }
+
+  .pageActions {
+    width: 100%;
+    gap: spacing(3);
+
+    & button {
+      flex: 1;
+    }
+  }
+}

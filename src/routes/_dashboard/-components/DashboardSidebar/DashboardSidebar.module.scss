@@ -1,0 +1,206 @@
+.sidebar {
+  width: 283px;
+  background-color: $white;
+  box-shadow: 0 5px 20px rgba($black, 0.04);
+  display: grid;
+  grid-template-rows: 1fr auto;
+  position: sticky;
+  top: 80px;
+  height: calc(100vh - 80px);
+  align-self: start;
+}
+
+.scrollArea {
+  padding: spacing(6) 0;
+  overflow: auto;
+  scrollbar-gutter: stable;
+  @include custom-scrollbar(
+    8px,
+    rgba($secondary, 0.18),
+    rgba($secondary, 0.28)
+  );
+}
+
+.switchOrg {
+  display: flex;
+  align-items: center;
+  gap: spacing(3);
+  padding: spacing(2) spacing(8);
+  color: rgba($secondary, 0.9);
+  @include text-size(sm);
+  font-weight: $font-weight-medium;
+}
+
+.switchOrgText {
+  @include truncate;
+}
+
+.switchOrgIcon {
+  width: 18px;
+  height: 18px;
+  color: rgba($secondary, 0.8);
+}
+
+.switchOrgCaret {
+  width: 16px;
+  height: 16px;
+  margin-left: auto;
+  color: rgba($secondary, 0.6);
+}
+
+.nav {
+  margin-top: spacing(4);
+}
+
+.group {
+  margin-top: spacing(6);
+}
+
+.groupTitle {
+  padding: 0 spacing(8);
+  margin: 0 0 spacing(2);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  @include text-size('2xs');
+  font-weight: $font-weight-semibold;
+  color: $foreground;
+}
+
+.groupList {
+  @include reset-list;
+}
+
+.navItem,
+.navItemStatic {
+  @include reset-link;
+  @include reset-button;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: spacing(3);
+  padding: spacing(3) spacing(8);
+  color: rgba($secondary, 0.6);
+  @include text-size(sm);
+  position: relative;
+  cursor: pointer;
+  @include transition(background-color);
+
+  &:hover {
+    background-color: rgba($primary, 0.06);
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgba($primary, 0.6);
+    outline-offset: -2px;
+  }
+}
+
+.navIcon {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  color: currentColor;
+  opacity: 0.6;
+}
+
+.navLabel {
+  @include truncate;
+}
+
+.navItemActive {
+  background-color: rgba($primary, 0.06);
+  color: rgba($secondary, 0.95);
+  font-weight: $font-weight-medium;
+
+  &::before {
+    @include pseudo;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background-color: $primary;
+  }
+
+  & .navIcon {
+    opacity: 1;
+  }
+}
+
+.footer {
+  padding: spacing(4) 0 spacing(3);
+  border-top: 1px solid rgba($foreground, 0.08);
+}
+
+.version {
+  padding: spacing(3) spacing(8) 0;
+  @include text-size(xs);
+  color: rgba($foreground, 0.8);
+}
+
+.logout {
+  @include reset-link;
+  @include reset-button;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: spacing(3);
+  padding: spacing(3) spacing(8);
+  color: $secondary;
+  @include text-size(sm);
+  position: relative;
+  cursor: pointer;
+  @include transition(background-color);
+
+  &:hover {
+    background-color: rgba($primary, 0.06);
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgba($primary, 0.6);
+    outline-offset: -2px;
+  }
+}
+
+.logoutIcon {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  color: currentColor;
+}
+
+.overlay {
+  display: none;
+}
+
+@include respond-below(tablet) {
+  .overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background-color: rgba($black, 0.5);
+    z-index: 40;
+    opacity: 0;
+    visibility: hidden;
+    @include transition(opacity, visibility);
+  }
+
+  .overlayVisible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 50;
+    transform: translateX(-100%);
+    @include transition(transform);
+  }
+
+  .sidebarOpen {
+    transform: translateX(0);
+  }
+}
