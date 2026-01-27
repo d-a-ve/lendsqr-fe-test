@@ -122,14 +122,18 @@
   width: 100%;
 }
 
-@include respond-below('md') {
+@include respond-below('lg') {
   .card {
     grid-template-columns: 1fr;
   }
 
   .left {
     padding: spacing(10) spacing(8);
-    display: none;
+    // Need to do it this way because using display:none causes the linear gradient on the logo to disappear
+    position: absolute;
+    left: -100%;
+    opacity: 0;
+    visibility: hidden;
   }
 
   .right {

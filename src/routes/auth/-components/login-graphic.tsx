@@ -1,10 +1,11 @@
 import { type ComponentPropsWithRef } from 'react'
-
+import styles from './login-graphic.module.scss'
 type LoginGraphicProps = ComponentPropsWithRef<'svg'>
 
 export const LoginGraphic = ({
   width = 600,
   height = 338,
+  className,
   ...props
 }: LoginGraphicProps) => {
   return (
@@ -15,6 +16,7 @@ export const LoginGraphic = ({
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
+      className={[styles.graphic, className].filter(Boolean).join(' ')}
       {...props}
     >
       <rect width={width} height={height} fill="url(#pattern0_6819_58338)" />
