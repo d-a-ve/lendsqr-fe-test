@@ -1,9 +1,10 @@
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
 import { Logo } from '@/components/Logo'
+import { AuthenticatedUserLocalStorageKey } from '@/const'
 import { sleep } from '@/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { createFileRoute, useRouter } from '@tanstack/react-router'
+import { createFileRoute, redirect, useRouter } from '@tanstack/react-router'
 import { useEffect, useId, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -11,6 +12,15 @@ import { LoginGraphic } from './-components/login-graphic'
 import styles from './login.module.scss'
 
 export const Route = createFileRoute('/auth/login')({
+  validateSearch: (params) => params as { redirect?: string },
+  beforeLoad: () => {
+    const authenticatedUser = localStorage.getItem(
+      AuthenticatedUserLocalStorageKey,
+    )
+    if (authenticatedUser) {
+      throw redirect({ to: '/users', replace: true })
+    }
+  },
   component: RouteComponent,
 })
 
@@ -37,6 +47,7 @@ function RouteComponent() {
   const formErrorId = useId()
 
   const router = useRouter()
+  const { redirect } = Route.useSearch()
 
   const rootErrorTimeoutRef = useRef<number | null>(null)
 
@@ -94,7 +105,11 @@ function RouteComponent() {
 
     await sleep(LOGIN_DELAY_MS)
 
-    await router.navigate({ to: '/users', replace: true })
+    localStorage.setItem(AuthenticatedUserLocalStorageKey, 'true')
+    await router.navigate({
+      to: redirect ?? '/users',
+      replace: true,
+    })
   }
 
   const formError = errors.root?.message
