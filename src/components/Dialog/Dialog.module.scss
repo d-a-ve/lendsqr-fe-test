@@ -1,0 +1,142 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  isolation: isolate;
+  z-index: 50;
+  background-color: rgba(0, 0, 0, 0.1);
+
+  @supports (backdrop-filter: blur(1px)) {
+    backdrop-filter: blur(4px);
+  }
+
+  &[data-open] {
+    animation: fadeIn 100ms ease-out;
+  }
+
+  &[data-closed] {
+    animation: fadeOut 100ms ease-in;
+  }
+}
+
+.content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 50;
+  display: grid;
+  width: min(480px, calc(100vw - 16px));
+  gap: spacing(4);
+  padding: spacing(8) spacing(6);
+  background-color: $white;
+  border: 1px solid rgba($foreground, 0.1);
+  border-radius: $radius-xl;
+  outline: none;
+  transform: translate(-50%, -50%);
+  @include text-size(sm);
+
+  &[data-open] {
+    animation: fadeIn 100ms ease-out, zoomIn 100ms ease-out;
+  }
+
+  &[data-closed] {
+    animation: fadeOut 100ms ease-in, zoomOut 100ms ease-in;
+  }
+}
+
+.closeButton {
+  position: absolute;
+  top: spacing(2);
+  right: spacing(2);
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  padding: 0;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: spacing(2);
+}
+
+.footer {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: spacing(2);
+  margin: 0 calc(spacing(4) * -1) calc(spacing(4) * -1);
+  padding: spacing(4);
+  border-radius: 0 0 $radius-xl $radius-xl;
+
+  @include respond-to(sm) {
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+}
+
+.title {
+  @include text-size(base);
+  font-weight: $font-weight-medium;
+  line-height: 1;
+}
+
+.description {
+  color: rgba($foreground, 0.6);
+  @include text-size(sm);
+
+  a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+
+    &:hover {
+      color: $foreground;
+    }
+  }
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes zoomOut {
+  from {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  to {
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+}

@@ -27,6 +27,7 @@ import { useSidebar } from '@/routes/_dashboard/-components/SidebarContext'
 import { Link } from '@tanstack/react-router'
 import { ChevronDown } from 'lucide-react'
 import styles from './DashboardSidebar.module.scss'
+import { LogoutModal } from './LogoutModal'
 
 type NavItem =
   | {
@@ -154,10 +155,12 @@ export function DashboardSidebar() {
         </div>
 
         <div className={styles.footer}>
-          <Link to="/auth/login" className={styles.logout} onClick={close}>
-            <SignoutIcon className={styles.logoutIcon} aria-hidden="true" />
-            <span>Logout</span>
-          </Link>
+          <LogoutModal>
+            <button type="button" className={styles.logout}>
+              <SignoutIcon className={styles.logoutIcon} aria-hidden="true" />
+              <span>Logout</span>
+            </button>
+          </LogoutModal>
           <div className={styles.version}>v1.2.0</div>
         </div>
       </aside>
