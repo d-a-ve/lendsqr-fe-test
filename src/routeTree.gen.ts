@@ -10,7 +10,6 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as DashboardRouteRouteImport } from './routes/_dashboard/route'
-import { Route as DashboardIndexRouteImport } from './routes/_dashboard/index'
 import { Route as AuthLoginRouteImport } from './routes/auth/login'
 import { Route as DashboardUsersIndexRouteImport } from './routes/_dashboard/users.index'
 import { Route as DashboardUsersUserIdRouteImport } from './routes/_dashboard/users.$userId'
@@ -18,11 +17,6 @@ import { Route as DashboardUsersUserIdRouteImport } from './routes/_dashboard/us
 const DashboardRouteRoute = DashboardRouteRouteImport.update({
   id: '/_dashboard',
   getParentRoute: () => rootRouteImport,
-} as any)
-const DashboardIndexRoute = DashboardIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => DashboardRouteRoute,
 } as any)
 const AuthLoginRoute = AuthLoginRouteImport.update({
   id: '/auth/login',
@@ -42,13 +36,11 @@ const DashboardUsersUserIdRoute = DashboardUsersUserIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/auth/login': typeof AuthLoginRoute
-  '/': typeof DashboardIndexRoute
   '/users/$userId': typeof DashboardUsersUserIdRoute
   '/users': typeof DashboardUsersIndexRoute
 }
 export interface FileRoutesByTo {
   '/auth/login': typeof AuthLoginRoute
-  '/': typeof DashboardIndexRoute
   '/users/$userId': typeof DashboardUsersUserIdRoute
   '/users': typeof DashboardUsersIndexRoute
 }
@@ -56,20 +48,18 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_dashboard': typeof DashboardRouteRouteWithChildren
   '/auth/login': typeof AuthLoginRoute
-  '/_dashboard/': typeof DashboardIndexRoute
   '/_dashboard/users/$userId': typeof DashboardUsersUserIdRoute
   '/_dashboard/users/': typeof DashboardUsersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/auth/login' | '/' | '/users/$userId' | '/users'
+  fullPaths: '/auth/login' | '/users/$userId' | '/users'
   fileRoutesByTo: FileRoutesByTo
-  to: '/auth/login' | '/' | '/users/$userId' | '/users'
+  to: '/auth/login' | '/users/$userId' | '/users'
   id:
     | '__root__'
     | '/_dashboard'
     | '/auth/login'
-    | '/_dashboard/'
     | '/_dashboard/users/$userId'
     | '/_dashboard/users/'
   fileRoutesById: FileRoutesById
@@ -87,13 +77,6 @@ declare module '@tanstack/react-router' {
       fullPath: ''
       preLoaderRoute: typeof DashboardRouteRouteImport
       parentRoute: typeof rootRouteImport
-    }
-    '/_dashboard/': {
-      id: '/_dashboard/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof DashboardIndexRouteImport
-      parentRoute: typeof DashboardRouteRoute
     }
     '/auth/login': {
       id: '/auth/login'
@@ -120,13 +103,11 @@ declare module '@tanstack/react-router' {
 }
 
 interface DashboardRouteRouteChildren {
-  DashboardIndexRoute: typeof DashboardIndexRoute
   DashboardUsersUserIdRoute: typeof DashboardUsersUserIdRoute
   DashboardUsersIndexRoute: typeof DashboardUsersIndexRoute
 }
 
 const DashboardRouteRouteChildren: DashboardRouteRouteChildren = {
-  DashboardIndexRoute: DashboardIndexRoute,
   DashboardUsersUserIdRoute: DashboardUsersUserIdRoute,
   DashboardUsersIndexRoute: DashboardUsersIndexRoute,
 }

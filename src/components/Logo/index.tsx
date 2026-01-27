@@ -3,7 +3,7 @@ import styles from './logo.module.scss'
 
 export const Logo = ({ width = 140 }: { width?: number }) => {
   return (
-    <Link to="/" className={styles.logo} style={{ width: `${width}px` }}>
+    <Link to="/users" className={styles.logo} style={{ width: `${width}px` }}>
       <svg
         width="174"
         height="36"
@@ -12,8 +12,8 @@ export const Logo = ({ width = 140 }: { width?: number }) => {
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M0 2.66541C0 2.11304 0.443238 1.66525 0.99 1.66525H3.96C4.50676 1.66525 4.95 2.11304 4.95 2.66541V20.6682C4.95 21.2206 5.39324 21.6684 5.94 21.6684H18.81C19.3568 21.6684 19.8 21.2206 19.8 20.6682V17.6678C19.8 17.1154 19.3568 16.6676 18.81 16.6676H12.87C11.2297 16.6676 9.9 15.3243 9.9 13.6671V4.66573C9.9 3.00861 11.2297 1.66525 12.87 1.66525H21.78C23.4203 1.66525 24.75 3.00861 24.75 4.66573V23.6687C24.75 25.3258 23.4203 26.6692 21.78 26.6692H2.97C1.32971 26.6692 0 25.3258 0 23.6687V2.66541ZM19.8 7.6662C19.8 7.11383 19.3568 6.66604 18.81 6.66604H14.85V10.6667C14.85 11.219 15.2932 11.6668 15.84 11.6668H19.8V7.6662Z"
           fill="url(#paint0_linear_6819_58335)"
         />
@@ -51,8 +51,8 @@ export const Logo = ({ width = 140 }: { width?: number }) => {
             y2="-4.22382"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#213F7D" />
-            <stop offset="1" stop-color="#39CDCC" />
+            <stop stopColor="#213F7D" />
+            <stop offset="1" stopColor="#39CDCC" />
           </linearGradient>
         </defs>
       </svg>

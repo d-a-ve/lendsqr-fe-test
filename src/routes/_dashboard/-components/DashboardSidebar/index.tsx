@@ -33,7 +33,7 @@ type NavItem =
       kind: 'link'
       label: string
       icon: typeof UsersIcon
-      to: '/' | '/users' | '/auth/login'
+      to: '/users' | '/auth/login'
     }
   | {
       kind: 'static'
@@ -108,23 +108,14 @@ export function DashboardSidebar() {
               aria-hidden="true"
             />
             <span className={styles.switchOrgText}>Switch Organization</span>
-            <ChevronDown
-              className={styles.switchOrgCaret}
-              aria-hidden="true"
-            />
+            <ChevronDown className={styles.switchOrgCaret} aria-hidden="true" />
           </div>
 
           <nav className={styles.nav} aria-label="Dashboard navigation">
-            <Link
-              to="/"
-              className={styles.navItem}
-              activeProps={{ className: styles.navItemActive }}
-              activeOptions={{ exact: true }}
-              onClick={close}
-            >
+            <div className={styles.navItem}>
               <HomeIcon className={styles.navIcon} aria-hidden="true" />
               <span className={styles.navLabel}>Dashboard</span>
-            </Link>
+            </div>
 
             {sidebarGroups.map((group) => (
               <section className={styles.group} key={group.label}>
