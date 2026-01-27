@@ -97,3 +97,27 @@ export const userQueryOptions = (userId: string) =>
       return user
     },
   })
+
+export const searchUsersQueryOptions = (searchTerm: string) =>
+  queryOptions({
+    queryKey: ['search', searchTerm],
+    queryFn: async () => {
+      await sleep(3000)
+
+      const localStorageData = localStorage.getItem(UserLocalStorageKey)
+      const allUsers = localStorageData
+        ? (JSON.parse(localStorageData) as User[])
+        : users
+
+      const term = searchTerm.toLowerCase().trim()
+
+      const filteredUsers = allUsers.filter((user) => {
+        const nameMatch = user.profile.fullName.toLowerCase().includes(term)
+        const emailMatch = user.email.toLowerCase().includes(term)
+        return nameMatch || emailMatch
+      })
+
+      return filteredUsers.slice(0, 20)
+    },
+    enabled: searchTerm.length > 0,
+  })

@@ -1,16 +1,15 @@
-import { Button } from '@/components/Button'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/Dropdown'
-import { Input } from '@/components/Input'
 import { Logo } from '@/components/Logo'
+import { SearchInput } from '@/components/SearchInput'
 import { useBodyScrollLock } from '@/hooks'
 import { useSidebar } from '@/routes/_dashboard/-components/SidebarContext'
-import { Bell, ChevronDown, Menu, Search, X } from 'lucide-react'
-import { useEffect, useRef, useState } from 'react'
+import { Bell, ChevronDown, Menu, Search } from 'lucide-react'
+import { useEffect, useState } from 'react'
 import styles from './DashboardHeader.module.scss'
 
 const currentUser = {
@@ -20,15 +19,8 @@ const currentUser = {
 export function DashboardHeader() {
   const { toggle } = useSidebar()
   const [isSearchOpen, setIsSearchOpen] = useState(false)
-  const searchInputRef = useRef<HTMLInputElement>(null)
 
   useBodyScrollLock(isSearchOpen)
-
-  useEffect(() => {
-    if (isSearchOpen) {
-      searchInputRef.current?.focus()
-    }
-  }, [isSearchOpen])
 
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -56,29 +48,7 @@ export function DashboardHeader() {
         </div>
 
         <div className={styles.right}>
-          <form
-            className={styles.searchForm}
-            role="search"
-            onSubmit={(e) => {
-              e.preventDefault()
-            }}
-          >
-            <Input
-              className={styles.searchInput}
-              type="search"
-              placeholder="Search for anything"
-              aria-label="Search for anything"
-            />
-            <Button
-              type="submit"
-              variant="primary"
-              size="sm"
-              className={styles.searchButton}
-              aria-label="Search"
-            >
-              <Search className={styles.searchIcon} />
-            </Button>
-          </form>
+          <SearchInput className={styles.searchForm} />
 
           <div className={styles.actions}>
             <button
@@ -124,34 +94,10 @@ export function DashboardHeader() {
       </div>
 
       {isSearchOpen && (
-        <div className={styles.searchModal} role="dialog" aria-modal="true">
-          <div className={styles.searchModalHeader}>
-            <form
-              className={styles.searchModalForm}
-              role="search"
-              onSubmit={(e) => {
-                e.preventDefault()
-              }}
-            >
-              <Search className={styles.searchModalIcon} aria-hidden="true" />
-              <input
-                ref={searchInputRef}
-                type="search"
-                className={styles.searchModalInput}
-                placeholder="Search for anything"
-                aria-label="Search for anything"
-              />
-            </form>
-            <button
-              type="button"
-              className={styles.searchModalClose}
-              aria-label="Close search"
-              onClick={() => setIsSearchOpen(false)}
-            >
-              <X className={styles.closeIcon} />
-            </button>
-          </div>
-        </div>
+        <SearchInput
+          variant="mobile"
+          onNavigate={() => setIsSearchOpen(false)}
+        />
       )}
     </header>
   )
