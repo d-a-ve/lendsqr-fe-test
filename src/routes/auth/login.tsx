@@ -57,7 +57,6 @@ function RouteComponent() {
     setValue,
     setError,
     clearErrors,
-    setFocus,
     formState: { errors, isSubmitting },
   } = useForm<LoginValues>({
     resolver: zodResolver(loginSchema as any),
@@ -79,7 +78,6 @@ function RouteComponent() {
     setValue('email', DEMO_EMAIL, { shouldDirty: true })
     setValue('password', DEMO_PASSWORD, { shouldDirty: true })
     clearErrors()
-    setFocus('password')
   }
 
   const onSubmit = async ({ email, password }: LoginValues) => {
