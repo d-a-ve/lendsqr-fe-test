@@ -1,9 +1,9 @@
-import { UserLocalStorageKey } from '@/const'
+import { UserLocalStorageKey, type UserStatus } from '@/const'
 import { users } from '@/mocks'
 import type { UserFilters } from '@/routes/_dashboard/-components/UserFilterPopover'
 import type { User } from '@/types'
 import { sleep } from '@/utils'
-import { QueryClient, queryOptions } from '@tanstack/react-query'
+import { QueryClient, mutationOptions, queryOptions } from '@tanstack/react-query'
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -121,3 +121,35 @@ export const searchUsersQueryOptions = (searchTerm: string) =>
     },
     enabled: searchTerm.length > 0,
   })
+
+export type UpdateUserStatusVariables = {
+  userId: string
+  status: UserStatus
+  pagination?: { page: number; pageSize: number }
+}
+
+export const updateUserStatusMutationOptions = mutationOptions({
+  mutationFn: async (
+    { userId, status, pagination }: UpdateUserStatusVariables,
+    ctx,
+  ) => {
+    const localStorageData = localStorage.getItem(UserLocalStorageKey)
+    const allUsers = localStorageData
+      ? (JSON.parse(localStorageData) as User[])
+      : users
+
+    const updatedUsers = allUsers.map((u) =>
+      u.id === userId ? { ...u, status } : u,
+    )
+
+    localStorage.setItem(UserLocalStorageKey, JSON.stringify(updatedUsers))
+
+    const { page = 1, pageSize = 20 } = pagination ?? {}
+    await Promise.all([
+      ctx.client.invalidateQueries(usersQueryOptions({ page, pageSize })),
+      ctx.client.invalidateQueries(userQueryOptions(userId))
+    ])
+
+    return updatedUsers.find((u) => u.id === userId)!
+  },
+})

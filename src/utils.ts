@@ -1,7 +1,34 @@
-import type { UserStatus } from '@/const'
+import { UserStatus, type UserStatus as UserStatusType } from '@/const'
+
+export type UserStatusAction = 'activate' | 'blacklist' | 'inactivate'
+
+export function getAvailableActions(status: UserStatusType): UserStatusAction[] {
+  switch (status) {
+    case UserStatus.Pending:
+      return ['activate']
+    case UserStatus.Active:
+      return ['blacklist', 'inactivate']
+    case UserStatus.Blacklisted:
+    case UserStatus.Inactive:
+      return ['activate']
+    default:
+      return []
+  }
+}
+
+export function actionToStatus(action: UserStatusAction): UserStatusType {
+  switch (action) {
+    case 'activate':
+      return UserStatus.Active
+    case 'blacklist':
+      return UserStatus.Blacklisted
+    case 'inactivate':
+      return UserStatus.Inactive
+  }
+}
 
 export function statusVariant(
-  status: UserStatus,
+  status: UserStatusType,
 ): 'default' | 'success' | 'warning' | 'error' {
   switch (status) {
     case 'Active':

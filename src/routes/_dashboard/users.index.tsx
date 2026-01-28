@@ -1,16 +1,7 @@
-import { Badge } from '@/components/Badge'
-import { Button } from '@/components/Button'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/Dropdown'
 import { ErrorState } from '@/components/ErrorState'
 import {
   NpLoanIcon,
   NpMoneyIcon,
-  NpUserCheckIcon,
   NpUserGroupIcon,
   NpUsersIcon,
 } from '@/components/Icons'
@@ -23,25 +14,14 @@ import {
   SelectValue,
 } from '@/components/Select'
 import { Skeleton } from '@/components/Skeleton'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/Table'
 import { UserStatusValues } from '@/const'
 import { usersQueryOptions } from '@/lib/query'
-import {
-  UserFilterPopover,
-  type UserFilters,
-} from '@/routes/_dashboard/-components/UserFilterPopover'
-import { formatCompactNumber, formatDateJoined, statusVariant } from '@/utils'
+import { UsersTable } from '@/routes/_dashboard/-components/UsersTable'
+import type { UserFilters } from '@/routes/_dashboard/-components/UserFilterPopover'
+import { formatCompactNumber } from '@/utils'
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
 import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { zodValidator } from '@tanstack/zod-adapter'
-import { Eye, MoreVertical, UserX } from 'lucide-react'
 import z from 'zod'
 import styles from './users.index.module.scss'
 
@@ -220,170 +200,14 @@ function RouteComponent() {
         data-loading={isFetching}
         data-empty={pageUsers.length === 0}
       >
-        <Table>
-          <TableHeader>
-            <TableHead>
-              <span>Organization</span>
-              <UserFilterPopover
-                filters={searchParams.filters}
-                organizations={organizations}
-                onFilter={handleFilter}
-                onReset={resetFilters}
-              />
-            </TableHead>
-
-            <TableHead>
-              <span>Username</span>
-              <UserFilterPopover
-                filters={searchParams.filters}
-                organizations={organizations}
-                onFilter={handleFilter}
-                onReset={resetFilters}
-              />
-            </TableHead>
-
-            <TableHead>
-              <span>Email</span>
-              <UserFilterPopover
-                filters={searchParams.filters}
-                organizations={organizations}
-                onFilter={handleFilter}
-                onReset={resetFilters}
-              />
-            </TableHead>
-
-            <TableHead>
-              <span>Phone Number</span>
-              <UserFilterPopover
-                filters={searchParams.filters}
-                organizations={organizations}
-                onFilter={handleFilter}
-                onReset={resetFilters}
-              />
-            </TableHead>
-
-            <TableHead>
-              <span>Date Joined</span>
-              <UserFilterPopover
-                filters={searchParams.filters}
-                organizations={organizations}
-                onFilter={handleFilter}
-                onReset={resetFilters}
-              />
-            </TableHead>
-
-            <TableHead>
-              <span>Status</span>
-              <UserFilterPopover
-                filters={searchParams.filters}
-                organizations={organizations}
-                onFilter={handleFilter}
-                onReset={resetFilters}
-              />
-            </TableHead>
-
-            <TableHead>
-              <span className={styles.srOnly}>Actions</span>
-            </TableHead>
-          </TableHeader>
-
-          <TableBody>
-            {pageUsers.length > 0 &&
-              pageUsers.map((user) => (
-                <TableRow
-                  key={user.id}
-                  onClick={() => {
-                    router.navigate({
-                      to: '/users/$userId',
-                      params: { userId: user.id },
-                    })
-                  }}
-                  className={styles.row}
-                >
-                  <TableCell>{user.organization}</TableCell>
-                  <TableCell>{user.username}</TableCell>
-                  <TableCell>{user.email}</TableCell>
-                  <TableCell>{user.phoneNumber}</TableCell>
-                  <TableCell>{formatDateJoined(user.dateJoined)}</TableCell>
-                  <TableCell>
-                    <Badge status={statusVariant(user.status)}>
-                      {user.status}
-                    </Badge>
-                  </TableCell>
-                  <TableCell className={styles.actionsCell}>
-                    <DropdownMenu>
-                      <DropdownMenuTrigger
-                        className={styles.kebabButton}
-                        aria-label="Row actions"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <MoreVertical aria-hidden="true" />
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent
-                        align="end"
-                        sideOffset={8}
-                        className={styles.rowMenu}
-                      >
-                        <DropdownMenuItem
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            router.navigate({
-                              to: '/users/$userId',
-                              params: { userId: user.id },
-                            })
-                          }}
-                        >
-                          <Eye aria-hidden="true" />
-                          View Details
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                          onClick={(e) => {
-                            // updateUserStatus(user.id, 'Blacklisted')
-                            e.stopPropagation()
-                          }}
-                        >
-                          <UserX aria-hidden="true" />
-                          Blacklist User
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                          onClick={(e) => {
-                            // updateUserStatus(user.id, 'Active')
-                            e.stopPropagation()
-                          }}
-                        >
-                          <NpUserCheckIcon aria-hidden="true" />
-                          Activate User
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </TableCell>
-                </TableRow>
-              ))}
-          </TableBody>
-        </Table>
-        {pageUsers.length === 0 && (
-          <div className={styles.emptyTableContent}>
-            <p className={styles.noUsersFound}>
-              No users found matching your filters.
-            </p>
-            <p className={styles.noUsersFoundDescription}>
-              Try adjusting your filters or clearing them to see all users.
-            </p>
-            <div>
-              <UserFilterPopover
-                trigger={
-                  <Button variant="primary" size="sm">
-                    Change Filters
-                  </Button>
-                }
-                filters={searchParams.filters}
-                organizations={organizations}
-                onFilter={handleFilter}
-                onReset={resetFilters}
-              />
-            </div>
-          </div>
-        )}
+        <UsersTable
+          users={pageUsers}
+          organizations={organizations}
+          filters={searchParams.filters}
+          onFilter={handleFilter}
+          onResetFilters={resetFilters}
+          pagination={{ page: searchParams.page, pageSize: searchParams.pageSize }}
+        />
       </section>
 
       <footer className={styles.footer}>

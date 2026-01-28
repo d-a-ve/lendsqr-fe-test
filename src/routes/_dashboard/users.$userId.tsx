@@ -2,9 +2,16 @@ import { Button } from '@/components/Button'
 import { ErrorState } from '@/components/ErrorState'
 import { NpChevronIcon, StarFillIcon, StarIcon } from '@/components/Icons'
 import { Skeleton } from '@/components/Skeleton'
-import { userQueryOptions } from '@/lib/query'
-import { formatCurrencyNGN, formatNumber } from '@/utils'
-import { useSuspenseQuery } from '@tanstack/react-query'
+import { updateUserStatusMutationOptions, userQueryOptions } from '@/lib/query'
+import { UserStatusModal } from '@/routes/_dashboard/-components/UserStatusModal'
+import {
+  actionToStatus,
+  formatCurrencyNGN,
+  formatNumber,
+  getAvailableActions,
+  type UserStatusAction,
+} from '@/utils'
+import { useMutation, useSuspenseQuery } from '@tanstack/react-query'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { User as UserIcon } from 'lucide-react'
 import { useState } from 'react'
@@ -32,11 +39,7 @@ export const Route = createFileRoute('/_dashboard/users/$userId')({
   ),
   errorComponent: () => (
     <div className={styles.page}>
-      <ErrorState
-        variant="notFound"
-        showRetry={false}
-        showBackToUsers={true}
-      />
+      <ErrorState variant="notFound" showRetry={false} showBackToUsers={true} />
     </div>
   ),
 })
@@ -85,6 +88,22 @@ function RouteComponent() {
   const { userId } = Route.useParams()
   const { data: user } = useSuspenseQuery(userQueryOptions(userId))
   const [tab, setTab] = useState<TabKey>('general')
+  const [pendingAction, setPendingAction] = useState<UserStatusAction | null>(
+    null,
+  )
+
+  const updateStatus = useMutation(updateUserStatusMutationOptions)
+
+  const availableActions = getAvailableActions(user.status)
+
+  const handleConfirm = () => {
+    if (!pendingAction) return
+    const newStatus = actionToStatus(pendingAction)
+    updateStatus.mutate(
+      { userId: user.id, status: newStatus },
+      { onSettled: () => setPendingAction(null) },
+    )
+  }
 
   const incomeRange = `${formatCurrencyNGN(user.educationAndEmployment.monthlyIncome[0])} - ${formatCurrencyNGN(user.educationAndEmployment.monthlyIncome[1])}`
 
@@ -98,14 +117,44 @@ function RouteComponent() {
       <div className={styles.pageHeader}>
         <h1 className={styles.pageTitle}>User Details</h1>
         <div className={styles.pageActions}>
-          <Button variant={'outline-destructive'} size={'sm'}>
-            Blacklist User
-          </Button>
-          <Button variant={'outline-primary'} size={'sm'}>
-            Activate User
-          </Button>
+          {availableActions.includes('inactivate') && (
+            <Button
+              variant={'outline'}
+              size={'sm'}
+              onClick={() => setPendingAction('inactivate')}
+            >
+              Inactivate User
+            </Button>
+          )}
+          {availableActions.includes('blacklist') && (
+            <Button
+              variant={'outline-destructive'}
+              size={'sm'}
+              onClick={() => setPendingAction('blacklist')}
+            >
+              Blacklist User
+            </Button>
+          )}
+          {availableActions.includes('activate') && (
+            <Button
+              variant={'outline-primary'}
+              size={'sm'}
+              onClick={() => setPendingAction('activate')}
+            >
+              Activate User
+            </Button>
+          )}
         </div>
       </div>
+
+      <UserStatusModal
+        userName={user.profile.fullName}
+        action={pendingAction ?? 'activate'}
+        open={pendingAction !== null}
+        onOpenChange={(open) => !open && setPendingAction(null)}
+        onConfirm={handleConfirm}
+        isLoading={updateStatus.isPending}
+      />
 
       <section className={styles.profileCard} aria-label="User summary">
         <div className={styles.profileTop}>

@@ -130,47 +130,6 @@
   }
 }
 
-.actionsCell {
-  width: 1%;
-  text-align: right;
-}
-
-.kebabButton {
-  @include reset-button;
-  @include flex-center;
-  width: 32px;
-  height: 32px;
-  border-radius: $radius-base;
-  color: rgba($secondary, 0.7);
-
-  &:hover {
-    background-color: rgba($foreground, 0.06);
-    color: rgba($secondary, 0.95);
-  }
-
-  &:focus-visible {
-    outline: 2px solid rgba($primary, 0.6);
-    outline-offset: 2px;
-  }
-}
-
-.emptyTableContent {
-  position: absolute;
-  padding-block: 150px;
-  top: 50%;
-  translate: -50% -50%;
-  left: 50%;
-  text-align: center;
-}
-
-.row {
-  cursor: pointer;
-}
-
-.rowMenu.rowMenu {
-  width: 180px;
-}
-
 .footer {
   display: flex;
   align-items: center;
@@ -196,10 +155,6 @@
   width: 80px;
   background: rgba($secondary, 0.1);
   padding: spacing(1) spacing(2);
-}
-
-.srOnly {
-  @include visually-hidden;
 }
 
 @include respond-below(lg) {

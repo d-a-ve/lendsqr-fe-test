@@ -1,0 +1,57 @@
+.actionsCell {
+  width: 1%;
+  text-align: right;
+}
+
+.kebabButton {
+  @include reset-button;
+  @include flex-center;
+  width: 32px;
+  height: 32px;
+  border-radius: $radius-base;
+  color: rgba($secondary, 0.7);
+
+  &:hover {
+    background-color: rgba($foreground, 0.06);
+    color: rgba($secondary, 0.95);
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgba($primary, 0.6);
+    outline-offset: 2px;
+  }
+}
+
+.emptyTableContent {
+  position: absolute;
+  padding-block: 150px;
+  top: 50%;
+  translate: -50% -50%;
+  left: 50%;
+  text-align: center;
+}
+
+.noUsersFound {
+  @include text-size(base);
+  font-weight: $font-weight-medium;
+  color: $secondary;
+  margin: 0 0 spacing(2);
+}
+
+.noUsersFoundDescription {
+  @include text-size(sm);
+  color: rgba($secondary, 0.6);
+  margin: 0 0 spacing(4);
+}
+
+.row {
+  cursor: pointer;
+}
+
+.rowMenu.rowMenu {
+  width: 180px;
+}
+
+.srOnly {
+  @include visually-hidden;
+}
