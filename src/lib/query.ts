@@ -19,7 +19,7 @@ export type UsersQueryParams = {
   filters?: UserFilters
 }
 
-function applyFilters(users: User[], filters: UserFilters) {
+export function applyFilters(users: User[], filters: UserFilters) {
   const org = filters.organization?.trim()
   const username = filters.username?.trim().toLowerCase()
   const email = filters.email?.trim().toLowerCase()
