@@ -86,7 +86,6 @@ export function DashboardHeader() {
                   Notifications
                 </DropdownMenuItem>
                 <DropdownMenuItem>Profile</DropdownMenuItem>
-                <DropdownMenuItem>Logout</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>

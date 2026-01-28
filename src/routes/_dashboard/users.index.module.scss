@@ -114,6 +114,10 @@
 
   &[data-empty='true'] {
     height: 450px;
+
+    & > div {
+      @include hide-scrollbar;
+    }
   }
 }
 
@@ -163,7 +167,7 @@
   cursor: pointer;
 }
 
-.rowMenu {
+.rowMenu.rowMenu {
   width: 180px;
 }
 
@@ -188,7 +192,7 @@
   color: rgba($secondary, 0.7);
 }
 
-.selectTrigger.selectTrigger {
+.selectTrigger[data-size='sm'].selectTrigger[data-size='sm'] {
   width: 80px;
   background: rgba($secondary, 0.1);
   padding: spacing(1) spacing(2);
