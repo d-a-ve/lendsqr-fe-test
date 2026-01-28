@@ -7,7 +7,7 @@
 .content {
   z-index: 50;
   width: min(288px, calc(100vw - 16px));
-  max-height: var(--available-height);
+  // max-height: var(--available-height);
   padding: 10px;
   display: flex;
   flex-direction: column;
