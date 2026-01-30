@@ -7,7 +7,7 @@ This application was developed as part of [Lendsqr's](https://lendsqr.com) front
 - **Live Demo**: [https://david-aronmwan-lendsqr-fe-test.vercel.app](https://david-aronmwan-lendsqr-fe-test.vercel.app)
 - **Figma Design**: [https://www.figma.com/file/ZKILoCoIoy1IESdBpq3GNC/Frontend](https://www.figma.com/file/ZKILoCoIoy1IESdBpq3GNC/Frontend)
 - **Google Doc Explainer**: [https://docs.google.com/document/d/1l6Mwt8tAl9VNq__y_e6Vc_n1Riqw3htHZ2sCYHcwl3I](https://docs.google.com/document/d/1l6Mwt8tAl9VNq__y_e6Vc_n1Riqw3htHZ2sCYHcwl3I/edit?usp=sharing)
-- **Loom Video Walkthrough**: *Coming soon*
+- **Loom Video Walkthrough**: [https://www.loom.com/share/c40ebdc52f58475c9d16efdbe4605dcd](https://www.loom.com/share/c40ebdc52f58475c9d16efdbe4605dcd)
 
 ## Tech Stack
 
