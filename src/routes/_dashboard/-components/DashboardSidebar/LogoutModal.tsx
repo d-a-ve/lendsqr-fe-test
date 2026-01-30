@@ -11,6 +11,7 @@ import {
 } from '@/components/Dialog'
 import { AuthenticatedUserLocalStorageKey } from '@/const'
 import { sleep } from '@/utils'
+import { useQueryClient } from '@tanstack/react-query'
 import { useRouter } from '@tanstack/react-router'
 import { useState, type ReactElement } from 'react'
 
@@ -20,11 +21,13 @@ export function LogoutModal({ children }: { children: ReactElement }) {
   const [open, setOpen] = useState(false)
   const [isLoggingOut, setIsLoggingOut] = useState(false)
   const router = useRouter()
+  const queryClient = useQueryClient()
 
   const handleLogout = async () => {
     setIsLoggingOut(true)
     await sleep(LOGOUT_DELAY_MS)
     localStorage.removeItem(AuthenticatedUserLocalStorageKey)
+    queryClient.clear()
     await router.navigate({ to: '/auth/login', replace: true })
   }
 
@@ -34,7 +37,9 @@ export function LogoutModal({ children }: { children: ReactElement }) {
       <DialogContent showCloseButton={!isLoggingOut}>
         <DialogHeader>
           <DialogTitle>Logout</DialogTitle>
-          <DialogDescription>Are you sure you want to logout?</DialogDescription>
+          <DialogDescription>
+            Are you sure you want to logout?
+          </DialogDescription>
         </DialogHeader>
         <DialogFooter>
           <DialogClose
