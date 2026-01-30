@@ -16,8 +16,8 @@ import {
 import { Skeleton } from '@/components/Skeleton'
 import { UserStatusValues } from '@/const'
 import { usersQueryOptions } from '@/lib/query'
-import { UsersTable } from '@/routes/_dashboard/-components/UsersTable'
 import type { UserFilters } from '@/routes/_dashboard/-components/UserFilterPopover'
+import { UsersTable } from '@/routes/_dashboard/-components/UsersTable'
 import { formatCompactNumber } from '@/utils'
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
 import { createFileRoute, useRouter } from '@tanstack/react-router'
@@ -47,7 +47,21 @@ export const Route = createFileRoute('/_dashboard/users/')({
     context.queryClient.ensureQueryData(
       usersQueryOptions({ page: 1, pageSize: 20, filters: undefined }),
     ),
-  pendingComponent: () => (
+  pendingComponent: () => <PageLoader />,
+  errorComponent: ({ error }) => (
+    <div className={styles.page}>
+      <ErrorState
+        variant="generic"
+        title="Failed to load users"
+        description="We couldn't retrieve the user list. This might be a temporary issue with the server or your connection."
+        errorCode={error.message}
+      />
+    </div>
+  ),
+})
+
+function PageLoader() {
+  return (
     <div className={styles.page}>
       <Skeleton heightInPx={48} widthInPx={100} />
 
@@ -60,18 +74,8 @@ export const Route = createFileRoute('/_dashboard/users/')({
 
       <Skeleton heightInPx={740} />
     </div>
-  ),
-  errorComponent: ({ error }) => (
-    <div className={styles.page}>
-      <ErrorState
-        variant="generic"
-        title="Failed to load users"
-        description="We couldn't retrieve the user list. This might be a temporary issue with the server or your connection."
-        errorCode={error.message}
-      />
-    </div>
-  ),
-})
+  )
+}
 
 function StatCard({
   icon,
@@ -99,11 +103,11 @@ function RouteComponent() {
   const router = useRouter()
   const searchParams = Route.useSearch()
 
-  const { data, isFetching } = useQuery({
+  const { data, isPending, isFetching } = useQuery({
     ...usersQueryOptions({
       page: searchParams.page,
       pageSize: searchParams.pageSize,
-      filters: searchParams.filters,
+      filters: searchParams.filters || undefined,
     }),
     placeholderData: keepPreviousData,
   })
@@ -161,6 +165,8 @@ function RouteComponent() {
     })
   }
 
+  if (isPending) return <PageLoader />
+
   return (
     <div className={styles.page}>
       <header className={styles.header}>
@@ -206,10 +212,12 @@ function RouteComponent() {
           filters={searchParams.filters}
           onFilter={handleFilter}
           onResetFilters={resetFilters}
-          pagination={{ page: searchParams.page, pageSize: searchParams.pageSize }}
+          pagination={{
+            page: searchParams.page,
+            pageSize: searchParams.pageSize,
+          }}
         />
       </section>
-
       <footer className={styles.footer}>
         <div className={styles.footerLeft}>
           <span className={styles.footerText}>Showing</span>
